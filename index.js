@@ -1,4 +1,5 @@
 const express = require('express')
+const helmet = require('helmet')
 const cors = require('cors')
 const multer = require('multer')
 const bodyParser = require('body-parser')
@@ -14,7 +15,19 @@ const PORT = 3000
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors({
+    origin: ['https://caiross-backend.onrender.com'],
+    methods: ['GET', 'POST']
+}))
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            connectSrc: ["'self'", 'https://caiross-backend.onrender.com']
+        }
+    }
+}))
+
 
 const jsonDirectory = path.join(__dirname, 'json')
 if (!fs.existsSync(jsonDirectory)) {
