@@ -11,6 +11,7 @@ dotenv.config()
 const app = express()
 const PORT = 3000
 
+app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
@@ -33,7 +34,7 @@ const upload = multer({ storage: storage })
 
 app.post('/upload', upload.single('file'), (req, res, next) => {
     const { password } = req.body;
-
+    console.log(req.body)
     console.log("Password from body:", password); // This should now log the password correctly
 
     // Check password after file upload
@@ -89,6 +90,10 @@ app.get('/jsons', (req, res) => {
             });
     });
 });
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/config.html'))
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
