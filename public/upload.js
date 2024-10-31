@@ -17,7 +17,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
 
     try {
         // Send the FormData using fetch
-        const response = await fetch('https://caiross-backend.onrender.com/upload', {
+        const response = await fetch('https://whale-app-n7rj7.ondigitalocean.app/upload', {
             method: 'POST',
             body: formData
         });
