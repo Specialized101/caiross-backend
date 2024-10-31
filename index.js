@@ -9,7 +9,7 @@ const path = require('path')
 dotenv.config()
 
 const app = express()
-const PORT = 3000
+const PORT = 8080
 
 app.use(express.static('public'))
 app.use(express.json())
